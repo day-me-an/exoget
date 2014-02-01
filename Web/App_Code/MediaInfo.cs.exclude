@@ -1,0 +1,149 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Collections.Generic;
+using MySql.Data.MySqlClient;
+using Exo.Web;
+using Exo.Exoget.Search;
+
+[Serializable]
+public class MediaInfo
+{
+    private MediaType type;
+    private uint id, views;
+    private ushort auth;
+    private string title, description, mediaUri, pageUri, imageUri, author;
+    private MediaPropertyInfo[] properties;
+    private string[] keywords;
+
+	public MediaInfo(uint id, ushort auth)
+	{
+        this.id = id;
+        this.auth = auth;
+	}
+
+    public MediaPropertyInfo[] GetPropertiesByType(IndexPropertyType type)
+    {
+        List<MediaPropertyInfo> propertyList = new List<MediaPropertyInfo>(Properties.Length);
+
+        foreach (MediaPropertyInfo property in properties)
+            if ((property.Type & type) == type)
+                propertyList.Add(property);
+
+        return propertyList.ToArray();
+    }
+
+    public bool TryGetSinglePropertyByType(IndexPropertyType type, out MediaPropertyInfo property)
+    {
+        foreach (MediaPropertyInfo currentProperty in properties)
+        {
+            if (currentProperty.Type == type)
+            {
+                property = currentProperty;
+                return true;
+            }
+        }
+
+        property = null;
+        return false;
+    }
+
+    public string GetSinglePropertyValueByType(IndexPropertyType type)
+    {
+        MediaPropertyInfo property;
+
+        return TryGetSinglePropertyByType(type, out property) ? property.Value : null;
+    }
+
+    public MediaPropertyInfo[] Properties
+    {
+        get
+        {
+            if (properties == null)
+                throw new NullReferenceException("no properties loaded");
+
+            return properties;
+        }
+
+        set { properties = value; }
+    }
+
+    public MediaType Type
+    {
+        get { return type; }
+        set { type = value; }
+    }
+
+    public uint Id
+    {
+        get { return id; }
+        set { id = value; }
+    }
+
+    public ushort Auth
+    {
+        get { return auth; }
+        set { auth = value; }
+    }
+
+    public string MediaUri
+    {
+        get { return mediaUri; }
+        set { mediaUri = value; }
+    }
+
+    public string PageUri
+    {
+        get { return pageUri; }
+        set { pageUri = value; }
+    }
+
+    public string ImageUri
+    {
+        get { return imageUri; }
+        set { imageUri = value; }
+    }
+
+    #region Properties
+
+    public string Title
+    {
+        get { return title; }
+        set { title = value; }
+    }
+
+    public string Description
+    {
+        get { return description; }
+        set { description = value; }
+    }
+
+    public string Author
+    {
+        get { return GetSinglePropertyValueByType(IndexPropertyType.Author); }
+    }
+
+    #endregion
+
+    public string[] Keywords
+    {
+        get { return keywords; }
+        set { keywords = value; }
+    }
+
+    #region Statistics
+
+    public uint Views
+    {
+        get { return views; }
+        set { views = value; }
+    }
+
+    #endregion
+}

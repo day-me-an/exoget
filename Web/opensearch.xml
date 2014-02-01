@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>exoGet</ShortName> 
+  <Description>exoGet is a multimedia search engine that allows you to cut through the hard-to-navigate, slow-loading and unfamiliar places on the web that contain the media you want by making everything searchable in a smart, fast and clean interface.</Description> 
+  <Tags>audio video music sound mp3 podcast multimedia exoget</Tags>
+  <Url type="text/html" method="GET" template="http://exoget.com/audio/search/{searchTerms}/"/>
+</OpenSearchDescription> 

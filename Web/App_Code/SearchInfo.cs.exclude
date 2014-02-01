@@ -1,0 +1,110 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Collections.Generic;
+
+public enum SearchWordType
+{
+    Include = 0,
+    Exclude
+}
+
+public enum SearchModiferType
+{
+    Author,
+    Genre,
+    Year
+}
+
+[Flags]
+public enum SearchOptions
+{
+    None = 0,
+    FindProperties
+}
+
+public class SearchInfo
+{
+    private static readonly Dictionary<string, SearchModiferType> WordToSearchModifier;
+
+    private SearchScope scope;
+    private SearchOptions options;
+    private KeyValuePair<string, SearchWordType>[] words;
+    private KeyValuePair<SearchModiferType, string>[] searchModifiers;
+
+    static SearchInfo()
+    {
+        WordToSearchModifier = new Dictionary<string, SearchModiferType>();
+
+        WordToSearchModifier["author"] = SearchModiferType.Author;
+        WordToSearchModifier["artist"] = SearchModiferType.Author;
+
+        WordToSearchModifier["genre"] = SearchModiferType.Genre;
+
+        WordToSearchModifier["year"] = SearchModiferType.Year;
+    }
+
+	public SearchInfo()
+	{
+	}
+
+    public static bool TryParse(string query, out SearchInfo search)
+    {
+        SearchInfo searchInfo = new SearchInfo();
+
+        /*List<KeyValuePair<SearchModiferType, string>> searchModifiersList = new List<KeyValuePair<SearchModiferType, string>>(1);
+
+        foreach (string searchModifer in WordToSearchModifier)
+        {
+            int modiferIndex, colonIndex, lastQuoteIndex, nextWhitespaceChar;
+            SearchModiferType modiferType;
+
+            if ((modiferIndex = query.IndexOf(searchModifer)) != -1 &&
+                (colonIndex = query.IndexOf(':', modiferIndex + searchModifer.Length + 1, 1)) != -1 &&
+                WordToSearchModifier.TryGetValue(query.Substring(modiferIndex, colonIndex - 1), out modiferType))
+            {
+                string modiferValue;
+
+                if (query[colonIndex + 1] == '"' && (lastQuoteIndex = query.IndexOf('"', colonIndex + 2)) != -1)
+                    modiferValue = query.Substring(colonIndex + 2, lastQuoteIndex - (colonIndex + 2));
+
+                else if ((nextWhitespaceChar = query.IndexOf(' ', colonIndex + 1)) != -1)
+                    modiferValue = query.Substring(colonIndex + 1, nextWhitespaceChar - (colonIndex + 1));
+
+                else
+                    modiferValue = query.Substring(colonIndex + 1, query.Length - (colonIndex + 1));
+
+                searchModifiersList.Add(new KeyValuePair<SearchModiferType, string>(modiferType, modiferValue));
+            }
+        }
+
+        searchInfo.SearchModifiers = searchModifiersList.ToArray();*/
+
+        search = searchInfo;
+
+        return true;
+    }
+
+    public SearchOptions Options
+    {
+        get { return options; }
+        set { options = value; }
+    }
+
+    public KeyValuePair<SearchModiferType, string>[] SearchModifiers
+    {
+        get { return searchModifiers; }
+        set { searchModifiers = value; }
+    }
+
+    public KeyValuePair<string, SearchWordType>[] Words
+    {
+        get { return words; }
+    }
+}

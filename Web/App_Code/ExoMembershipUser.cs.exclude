@@ -1,0 +1,51 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+namespace Exo.Web
+{
+    /// <summary>
+    /// Summary description for ExoMembershipUser
+    /// </summary>
+    public class ExoMembershipUser : MembershipUser
+    {
+        /*public ExoMembershipUser(string name,
+            object providerUserKey,
+            string email)
+
+            : base(null,
+            name,
+            providerUserKey,
+            email,
+            null,
+            null,
+            true,
+            false,
+            null,
+            null,
+            null,
+            null,
+            null)
+        {
+        }*/
+
+        public ExoMembershipUser()
+        {
+
+        }
+
+        public override object ProviderUserKey
+        {
+            get
+            {
+                return base.ProviderUserKey;
+            }
+        }
+    }
+}

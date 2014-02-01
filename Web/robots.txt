@@ -1,0 +1,30 @@
+User-agent: *
+Disallow: /search
+Disallow: /audio/search
+Disallow: /video/search
+Disallow: /audio/field
+Disallow: /video/field
+Disallow: /about
+Disallow: /contact
+Disallow: /signin
+Disallow: /register
+Disallow: /user_recover
+Disallow: /distdir
+Disallow: /css
+Disallow: /js
+Disallow: /images
+Disallow: /lt
+Disallow: .aspx
+Disallow: .ashx
+
+User-agent: Yahoo-MMCrawler
+Disallow: /
+
+User-agent: msnbot-media
+Disallow: /
+
+User-agent: asterias
+Disallow: /
+
+User-agent: Mediapartners-Google* 
+Disallow:

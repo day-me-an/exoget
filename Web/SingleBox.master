@@ -1,0 +1,7 @@
+<%@ Master Language="C#" AutoEventWireup="false" CodeFile="SingleBox.master.cs" Inherits="SingleBox" MasterPageFile="~/HeaderAndFooter.master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="content" runat="server">
+    <div class="box singleBox">
+        <h1><asp:ContentPlaceHolder ID="heading" runat="server"></asp:ContentPlaceHolder></h1>
+        <asp:ContentPlaceHolder ID="box" runat="server"></asp:ContentPlaceHolder>
+    </div>
+</asp:Content>

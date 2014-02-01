@@ -1,0 +1,1 @@
+﻿<%@ServiceHost Service="Exo.Exoget.Model.Service.User" Factory="System.ServiceModel.Activation.WebScriptServiceHostFactory" %>

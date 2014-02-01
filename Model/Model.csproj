@@ -1,0 +1,161 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.20706</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A2CE75F9-8781-4FEE-91A8-5342A0BDEFFB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Exo.Exoget.Model</RootNamespace>
+    <AssemblyName>Exo.Exoget.Model</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C5, Version=1.0.1.0, Culture=neutral, PublicKeyToken=06a1b38866503b69, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Exo\Exoget\Indexer\bin\Debug\C5.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=2.0.0.4, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Exo\Exoget\Indexer\bin\Debug\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft Enterprise Library 3.0 - April 2007\src\App Blocks\Src\Validation\Integration\AspNet\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Validation, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft Enterprise Library 3.0 - April 2007\src\App Blocks\Src\Validation\Integration\AspNet\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft Enterprise Library 3.0 - April 2007\src\App Blocks\Src\Validation\Integration\AspNet\bin\Debug\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=5.0.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\MySQL\MySQL Connector Net 5.0.8\Binaries\.NET 2.0\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SpellChecker.Net, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Libaries\SpellChecker.Net\bin\Debug\SpellChecker.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Feed\FeedInfo.cs" />
+    <Compile Include="Feed\FeedManager.cs" />
+    <Compile Include="PropertiesBase.cs" />
+    <Compile Include="Search\ExoLuceneExtensions.cs" />
+    <Compile Include="Search\ExoMultiFieldQueryParser.cs" />
+    <Compile Include="Search\SearchOptions.cs" />
+    <Compile Include="User\CommentInfo.cs" />
+    <Compile Include="Search\ExoLuceneAnalyzer.cs" />
+    <Compile Include="Search\ExoLuceneTokenizer.cs" />
+    <Compile Include="Search\IndexMediaPropertyMapType.cs" />
+    <Compile Include="Search\IndexWordAttribute.cs" />
+    <Compile Include="Search\IndexWordType.cs" />
+    <Compile Include="Search\IndexPropertyInfo.cs" />
+    <Compile Include="Search\IndexPropertyMapType.cs" />
+    <Compile Include="Search\IndexPropertyType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Media\MediaManager.cs" />
+    <Compile Include="Media\MediaInfo.cs" />
+    <Compile Include="Media\MediaPropertyInfo.cs" />
+    <Compile Include="Search\RelatedProperty.cs" />
+    <Compile Include="Search\ResultInfo.cs" />
+    <Compile Include="Search\SearchManager.cs" />
+    <Compile Include="Search\SearchInfo.cs" />
+    <Compile Include="Search\SearchModiferWordAttribute.cs" />
+    <Compile Include="Search\SearchScope.cs" />
+    <Compile Include="Media\MediaCommentInfo.cs" />
+    <Compile Include="Media\MediaManager_Comments.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="User\OperationResponseInfo.cs" />
+    <Compile Include="User\OperationStatus.cs" />
+    <Compile Include="User\Principal.cs" />
+    <Compile Include="User\UserManager_Favorite.cs" />
+    <Compile Include="User\UserManager.cs" />
+    <Compile Include="User\UserCommon.cs" />
+    <Compile Include="User\UserInfo.cs" />
+    <Compile Include="User\UserIdentity.cs" />
+    <Compile Include="User\UserManager_MediaComment.cs" />
+    <Compile Include="User\UserResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ExoLib\ExoLib.csproj">
+      <Project>{95BE1DD3-DA25-43BF-87D6-BA0D6A86D205}</Project>
+      <Name>ExoLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucene\Highlighter\Highlighter.Net-2.0.0.csproj">
+      <Project>{901D5415-383C-4AA6-A256-879558841BEA}</Project>
+      <Name>Highlighter.Net-2.0.0</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="User\UserResources.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

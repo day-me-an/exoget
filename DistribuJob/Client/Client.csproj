@@ -1,0 +1,261 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.20706</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{317D7FA0-D993-44CB-87A9-3DD9419390AD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DistribuJob.Client</RootNamespace>
+    <AssemblyName>Dj</AssemblyName>
+    <ApplicationIcon>exo 32x32 copy.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;/define DEBUG_WITH_IMPORT_EXPORT</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxInterop.QTOControlLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Exo\Exoget\DistribuJob\Client\bin\Debug\AxInterop.QTOControlLib.dll</HintPath>
+    </Reference>
+    <Reference Include="C5, Version=1.0.1.0, Culture=neutral, PublicKeyToken=06a1b38866503b69, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\Projects\C5.bin\C5.dll</HintPath>
+    </Reference>
+    <Reference Include="Djs, Version=1.0.2665.27004, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <ExecutableExtension>.exe</ExecutableExtension>
+      <HintPath>..\..\..\..\..\Exo\Exoget\DistribuJob\Client\bin\Debug\Djs.exe</HintPath>
+    </Reference>
+    <Reference Include="FlashPlayerControl, Version=1.0.2469.33992, Culture=neutral, PublicKeyToken=cc279db44d6062ab">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Exo\Exoget\DistribuJob\Client\bin\Debug\FlashPlayerControl.dll</HintPath>
+    </Reference>
+    <Reference Include="librmffNET, Version=1.0.1741.22982, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Exo\Exoget\DistribuJob\Client\bin\Debug\librmffNET.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration.Designer.cs">
+      <DependentUpon>Configuration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorConsole.Designer.cs">
+      <DependentUpon>ErrorConsole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportQueue.cs" />
+    <Compile Include="Extracts\ImageInfo.cs" />
+    <Compile Include="Extracts\Extract.cs" />
+    <Compile Include="Extracts\ImageExtract.cs" />
+    <Compile Include="Extracts\IndexPropertiesBase.cs" />
+    <Compile Include="Extracts\Links\AbsoluteSourceLink.cs" />
+    <Compile Include="Extracts\Links\EmbedLink.cs" />
+    <Compile Include="Extracts\Links\FeedItemLink.cs" />
+    <Compile Include="Extracts\Links\Link.cs" />
+    <Compile Include="Extracts\LinkComparer.cs" />
+    <Compile Include="Extracts\Links\LinkType.cs" />
+    <Compile Include="Extracts\MediaExtract.cs" />
+    <Compile Include="Extracts\Links\ArtificialMediaLink.cs" />
+    <Compile Include="Extracts\PlaylistExtract.cs" />
+    <Compile Include="Extracts\PageExtract.cs" />
+    <Compile Include="Extracts\FeedExtract.cs" />
+    <Compile Include="Extracts\Links\PageLink.cs" />
+    <Compile Include="FetchQueue.cs" />
+    <Compile Include="FetchStatus.cs" />
+    <Compile Include="Job.cs" />
+    <Compile Include="Job_NonSerialized.cs" />
+    <Compile Include="Net\Policies\DocumentTypeUriPolicy.cs" />
+    <Compile Include="Net\Policies\MetaInfoUriPolicy.cs" />
+    <Compile Include="Net\Policies\RegexUriPolicy.cs" />
+    <Compile Include="Net\Policies\RobotsExclusionParser.cs" />
+    <Compile Include="Net\Policies\UriPolicy.cs" />
+    <Compile Include="Net\Policies\ValueFromUriRegexUriPolicy.cs" />
+    <Compile Include="Net\Policies\XPathExpressionUriPolicy.cs" />
+    <Compile Include="Net\Server.cs" />
+    <Compile Include="Net\Servers.cs" />
+    <Compile Include="Net\ServerStatus.cs" />
+    <Compile Include="Processor.cs" />
+    <Compile Include="ProcessorDictionary.cs" />
+    <Compile Include="Processors\DirectshowExtractor.cs" />
+    <Compile Include="Processors\ExifToolExtractor.cs" />
+    <Compile Include="Processors\Fetcher.cs" />
+    <Compile Include="Dj.cs" />
+    <Compile Include="Processors\Fetcher_QueueControl.cs" />
+    <Compile Include="Processors\HtmlExtractor.cs" />
+    <Compile Include="Processors\HtmlExtractor_Heading.cs" />
+    <Compile Include="Processors\HtmlExtractor_LineRep.cs" />
+    <Compile Include="Processors\HtmlExtractor_Links.cs" />
+    <Compile Include="Processors\Html\ImageLineComparer.cs" />
+    <Compile Include="Processors\Html\Lines\DescriptionBasedOnCluesComparer.cs" />
+    <Compile Include="Processors\Html\Lines\DescriptionComparer.cs" />
+    <Compile Include="Processors\Html\Lines\HeadingToTitleComparer.cs" />
+    <Compile Include="Processors\Html\Lines\ImageLine.cs" />
+    <Compile Include="Processors\Html\Lines\ObjectLine.cs" />
+    <Compile Include="Processors\Html\Lines\Line.cs" />
+    <Compile Include="Processors\Html\Lines\LinkHasImageComparer.cs" />
+    <Compile Include="Processors\Html\Lines\LinkLine.cs" />
+    <Compile Include="Processors\Html\Lines\EmbedLine.cs" />
+    <Compile Include="Processors\Html\Lines\TextWeightComparer.cs" />
+    <Compile Include="Processors\Html\Sentence.cs" />
+    <Compile Include="Processors\Html\TitleComparer.cs" />
+    <Compile Include="Processors\Id3Extractor.cs" />
+    <Compile Include="Processors\ImageManipulator.cs" />
+    <Compile Include="Processors\M3uExtractor.cs" />
+    <Compile Include="Processors\MshtmlExtractor.cs" />
+    <Compile Include="Processors\PlaylistExtractor.cs" />
+    <Compile Include="Processors\QuicktimeExtractor.cs" />
+    <Compile Include="Processors\RealmediaExtractor.cs" />
+    <Compile Include="Processors\SwfExtractor.cs" />
+    <Compile Include="Processors\WindowsMetadataExtractor.cs" />
+    <Compile Include="Processors\FeedExtractor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="HelixProducerLib">
+      <Guid>{BE746EB1-6F27-47D9-BA6D-313633547328}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="MSHTML">
+      <Guid>{3050F1C5-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
+      <VersionMajor>4</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="QTOControlLib">
+      <Guid>{7B92F833-027D-402B-BFF9-A67697366F4E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="QTOLibrary">
+      <Guid>{29866AED-1E14-417D-BA0F-1A2BE6F5A19E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="SWFToImage">
+      <Guid>{F52B2898-3CD9-4530-8F1E-2762A2783C33}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="exo 32x32 copy.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Configuration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ErrorConsole.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ErrorConsole.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\HtmlAgilityPack\HtmlAgilityPack\HtmlAgilityPack.csproj">
+      <Project>{193BB801-054F-4729-9D5D-FCE1E32594BF}</Project>
+      <Name>HtmlAgilityPack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\taglib-sharp\taglib-sharp.csproj">
+      <Project>{4CC18776-125E-4318-9D24-D60110AD9697}</Project>
+      <Name>taglib-sharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ExoLib\ExoLib.csproj">
+      <Project>{95BE1DD3-DA25-43BF-87D6-BA0D6A86D205}</Project>
+      <Name>ExoLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Model\Model.csproj">
+      <Project>{A2CE75F9-8781-4FEE-91A8-5342A0BDEFFB}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,2 @@
+﻿<%@ Reference Control="~/UserControls/MediaResult.ascx" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SqlMediaResult.ascx.cs" Inherits="Exo.Exoget.Web.Controls.SqlMediaResult" %>

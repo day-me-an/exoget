@@ -1,0 +1,103 @@
+using System;
+using System.Web;
+using MySql.Data.MySqlClient;
+using System.Data;
+using System.Collections.Generic;
+using Exo.Exoget.Search;
+
+[Flags]
+public enum MediaInfoTypes
+{
+    Basic,
+    Properties,
+    Keywords
+}
+
+public class MediaHelper
+{
+    private readonly MySqlConnection conn;
+
+    public MediaHelper(MySqlConnection conn)
+    {
+        this.conn = conn;
+    }
+
+    public MediaInfo GetMediaById(uint docId, ushort auth, MediaInfoTypes infoTypes)
+    {
+        if (docId == 0/* || auth == 0*/)
+            return null;
+
+        MediaInfo media;
+
+        using (MySqlCommand command = new MySqlCommand("getMedia", conn))
+        {
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.Add("?id", docId);
+            command.Parameters.Add("?auth", auth);
+
+            command.Parameters.Add("?mediaUri", MySqlDbType.String);
+            command.Parameters.Add("?pageUri", MySqlDbType.String);
+            command.Parameters.Add("?imageUri", MySqlDbType.String);
+            command.Parameters.Add("?title", MySqlDbType.String);
+            command.Parameters.Add("?description", MySqlDbType.String);
+
+            command.ExecuteNonQuery();
+
+            media = new MediaInfo((uint)command.Parameters[0].Value, (ushort)command.Parameters[1].Value);
+
+            media.MediaUri = (string)command.Parameters[2].Value;
+            media.PageUri = command.Parameters[3].Value as string;
+            media.ImageUri = command.Parameters[4].Value as string;
+            media.Title = (string)command.Parameters[5].Value;
+            media.Description = command.Parameters[6].Value as string;
+        }
+
+        if ((infoTypes & MediaInfoTypes.Keywords) == MediaInfoTypes.Keywords)
+            LoadMediaKeywords(ref media);
+
+        if ((infoTypes & MediaInfoTypes.Properties) == MediaInfoTypes.Properties)
+            LoadMediaProperties(ref media);
+
+        return media;
+    }
+
+    public MediaInfo GetMediaById(uint docId, ushort auth)
+    {
+        return GetMediaById(docId, auth, MediaInfoTypes.Basic);
+    }
+
+    public MediaInfo[] GetMediaById(uint[] ids, ushort[] auths)
+    {
+        return null;
+    }
+
+    public void LoadMediaProperties(ref MediaInfo media)
+    {
+        List<MediaPropertyInfo> properties = new List<MediaPropertyInfo>();
+
+        using (MySqlCommand command = new MySqlCommand("SELECT props.type, props.value FROM props INNER JOIN mediapropmap ON props.id = mediapropmap.propId AND mediapropmap.mediaId = " + media.Id //+ " AND mediapropmap.type = " + (byte)IndexMediaPropertyMapType.Visible
+            , conn))
+        using (MySqlDataReader reader = command.ExecuteReader())
+        {
+            while (reader.Read())
+                properties.Add(new MediaPropertyInfo((IndexPropertyType)reader.GetInt32(0), reader.GetString(1)));
+        }
+
+        media.Properties = properties.ToArray();
+    }
+
+    public void LoadMediaKeywords(ref MediaInfo media)
+    {
+        List<string> keywords = new List<string>(12);
+
+        using (MySqlCommand command = new MySqlCommand("SELECT keywords.keyword FROM keywords INNER JOIN mediakeywordmap ON keywords.id = mediakeywordmap.keywordId WHERE mediakeywordmap.mediaId = " + media.Id, conn))
+        using (MySqlDataReader reader = command.ExecuteReader())
+        {
+            while (reader.Read())
+                keywords.Add(reader.GetString(0));
+        }
+
+        media.Keywords = keywords.ToArray();
+    }
+}

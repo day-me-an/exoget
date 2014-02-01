@@ -1,0 +1,57 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using MySql.Data.MySqlClient;
+using Microsoft.Practices.EnterpriseLibrary.Caching;
+
+public class CommentProvider
+{
+    //private static readonly CacheFactory commentCache = null;
+
+	public CommentProvider()
+	{
+	}
+
+    private static MySqlConnection DatabaseConnection
+    {
+        get
+        {
+            MySqlConnection dbConn = new MySqlConnection(ConfigurationManager.ConnectionStrings[2].ConnectionString);
+            dbConn.Open();
+
+            return dbConn;
+        }
+    }
+
+    public static CommentInfo[] GetCommentsForMedia(uint id)
+    {
+        using (MySqlConnection conn = DatabaseConnection)
+        using(MySqlCommand command = new MySqlCommand("SELECT comments.userId, users.userName FROM comments WHERE comments.mediaId = ?", conn))
+        {
+            command.Parameters[0] = new MySqlParameter("?mediaId", id);
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+
+            }
+        }
+
+        return null;
+    }
+
+    public static CommentInfo[] GetCommentsByUser(uint id, ushort auth)
+    {
+        return null;
+    }
+
+    public static CommentInfo[] GetCommentsForUser(uint id, ushort auth)
+    {
+        return null;
+    }
+}

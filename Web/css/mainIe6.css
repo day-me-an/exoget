@@ -1,0 +1,58 @@
+﻿html
+{
+	padding:5px;
+}
+
+#page
+{
+    width:expression(document.body.clientWidth>1000?"1000px":"auto");
+}
+
+.username strong
+{
+	cursor:pointer;
+}
+
+.mediaRow
+{
+	height:auto !important;
+	height:96px;	
+}
+
+.mediaRow .props li
+{
+    border-right-style:solid;
+}
+
+#searchForm .searchButton
+{
+    width:4em;
+    height:1.8em;
+}
+
+#searchFormScopes
+{
+	margin-left:242px;
+}
+
+.paging a:hover
+{
+    font-weight:bold;
+}
+
+.mediaDetails .propList .props .prop div .star-rating,
+.mediaDetails .propList .props .prop div button
+{
+	float:none;
+}
+
+.searchResults .top .resultCount
+{
+	margin-right:5px;
+}
+
+.searchResults .mediaResult
+{
+	float:left;
+	width:79%;
+}

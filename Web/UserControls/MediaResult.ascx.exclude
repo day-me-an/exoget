@@ -1,0 +1,67 @@
+<%@ Import Namespace="Exo.Exoget.Web.Controls" %>
+<%@ Reference Control="~\UserControls\MediaRow.ascx" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="MediaResult.ascx.cs" Inherits="Exo.Exoget.Web.Controls.MediaResult" %>
+
+<div class="mediaResult">
+
+    <div class="mediaRowList">
+        <asp:PlaceHolder ID="mediaRows" runat="server" />       
+    </div>
+
+    <br class="cb" />
+
+    <% if ((Options & MediaResultOptions.Paging) == MediaResultOptions.Paging && Result.ResultsFoundCount > 10)
+       {%>
+        <div class="paging">
+            <% if (CanNavigatePrevious)
+               { %>
+            <a class="action" href="<%=String.Format(PagingUriFormat, PageNumber - 1)%>">
+                &laquo; Previous</a>
+            <% }
+               else
+               { %>
+            <span class="numbersLabel">Results Page</span>
+            <% } %>
+            <div class="numbers">
+                <%
+                    const int perSide = 4;
+
+                    int currentPageNumber = PageNumber;
+                    int start = Math.Max(1, currentPageNumber - perSide);
+
+                    int maxEnd = (int)Math.Ceiling(Result.ResultsFoundCount / (double)ResultsPerPage);
+                    int end = currentPageNumber > perSide ? (currentPageNumber + perSide) : (perSide * 2 + 1 - start);
+
+                    if (end > maxEnd)
+                        end = maxEnd;
+
+                    for (int i = start; i <= end; i++)
+                    {
+                        int startIndex = (i - 1) * 10;
+
+                        if (startIndex > MaxPageStartIndex)
+                            break;
+
+                        if (startIndex != StartIndex)
+                        {
+                %>
+                <a href="<%=String.Format(PagingUriFormat, i - 1)%>"><%=i%></a>
+                <%
+                    }
+                    else
+                    {
+                %>
+                <span><%=i%></span>
+                <%
+                    }
+                }
+                %>
+            </div>
+            <% if (CanNavigateNext)
+               { %>
+            <a class="action" href="<%=String.Format(PagingUriFormat, PageNumber + 1)%>">Next &raquo;</a>
+            <% } %>
+        </div>
+    <%} %>
+
+</div>

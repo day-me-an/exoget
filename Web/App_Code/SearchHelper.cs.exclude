@@ -1,0 +1,84 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Text;
+
+public class SearchHelper
+{
+    private readonly MySqlConnection conn;
+
+    public SearchHelper(MySqlConnection conn)
+    {
+        this.conn = conn;
+    }
+
+    /*public ResultInfo GetSearchResults(SearchInfo search)
+    {
+        ResultInfo result = new ResultInfo();
+        List<MediaInfo> mediaList = new List<MediaInfo>(8);
+
+        uint[] wordIds = GetWordIds(QueryWords);
+
+        StringBuilder sql = new StringBuilder("SELECT HIGH_PRIORITY SQL_CALC_FOUND_ROWS mediaIds.mediaId FROM mediawordmap mediaIds");
+
+        for (int i = 0; i < wordIds.Length - 1; i++)
+            sql.Append(" INNER JOIN mediawordmap mediaIds" + i + " ON mediaIds.mediaId = mediaIds" + i + ".mediaId AND mediaIds" + i + ".wordId = " + wordIds[i]);
+
+        sql.Append(" WHERE mediaIds.wordId = " + wordIds[wordIds.Length - 1]);
+
+        if (PageNumber > 1)
+            sql.Append(" LIMIT " + ResultsStart + ", " + ResultsEnd);
+
+        else
+            sql.Append(" LIMIT " + ResultsPerPage);
+
+        sql.Append("; SELECT FOUND_ROWS();");
+
+        using (MySqlCommand command = new MySqlCommand(sql.ToString(), conn))
+        using (MySqlDataReader reader = command.ExecuteReader())
+        using (MySqlConnection conn2 = new MySqlConnection(ConfigurationManager.ConnectionStrings[2].ConnectionString))
+        {
+            conn2.Open();
+
+            MediaHelper mediaHelper = new MediaHelper(conn2);
+
+            while (reader.Read())
+                mediaList.Add(mediaHelper.GetMediaById(reader.GetUInt32(0), 0));
+
+            reader.NextResult();
+            reader.Read();
+
+            result.ResultsFoundCount = reader.GetUInt32(0);
+        }
+
+        if ((search.Options & SearchOptions.FindProperties) == SearchOptions.FindProperties)
+        {
+            using (MySqlCommand command = new MySqlCommand("", conn))
+            {
+
+            }
+        }
+    }*/
+
+    /*public string CriteriaSql(SearchInfo search)
+    {
+        StringBuilder criteriaSql = new StringBuilder();
+
+        for (int i = 0; i < wordIds.Length - 1; i++)
+        {
+            criteriaSql.Append(" INNER JOIN mediawordmap mediaIds" + i + " ON mediaIds.mediaId = mediaIds" + i + ".mediaId AND mediaIds" + i + ".wordId = " + wordIds[i]);
+        }
+
+        foreach (KeyValuePair<string, SearchWordType> word in search.Words)
+        {
+        }
+    }*/
+}

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Exo.Exoget.Model.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SearchIndexPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Exo\Indexer\index2</Value>
+    </Setting>
+    <Setting Name="SpellIndexPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Exo\Indexer\spellindex</Value>
+    </Setting>
+    <Setting Name="MediaCacheExpire" Type="System.TimeSpan" Scope="Application">
+      <Value Profile="(Default)">7.00:00:00</Value>
+    </Setting>
+    <Setting Name="MediaCacheCapacity" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">100000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

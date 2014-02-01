@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<base href="http://exoget.com" />
+<link rel="stylesheet" type="text/css" href="/css/main.css?hash=2297936030" />
+<link rel="search" title="exoGet" type="application/opensearchdescription+xml" href="/opensearch.xml" />
+<script type="text/javascript" src="/js/merge.js?hash=3972173495"></script>
+<!--[if IE]><link rel="stylesheet" type="text/css" href="/css/mainIe7.css?hash=2361329512" /><![endif]-->
+<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="/css/mainIe6.css?hash=3261085753" /><script type="text/javascript">fixIE6();</script><![endif]-->
+<title>exoGet Podcast's</title>
+
+<style>
+
+/* begin css tabs */
+
+ul#tabnav { /* general settings */
+text-align: left; /* set to left, right or center */
+margin: 1em 0 1em 0; /* set margins as desired */
+font: bold 11px verdana, arial, sans-serif; /* set font as desired */
+border-bottom: 1px solid #6c6; /* set border COLOR as desired */
+list-style-type: none;
+padding: 3px 10px 3px 10px; /* THIRD number must change with respect to padding-top (X) below */
+}
+
+ul#tabnav li { /* do not change */
+display: inline;
+}
+
+body#tab1 li.tab1, body#tab2 li.tab2, body#tab3 li.tab3, body#tab4 li.tab4 { /* settings for selected tab */
+border-bottom: 1px solid #fff; /* set border color to page background color */
+background-color: #fff; /* set background color to match above border color */
+}
+
+body#tab1 li.tab1 a, body#tab2 li.tab2 a, body#tab3 li.tab3 a, body#tab4 li.tab4 a { /* settings for selected tab link */
+background-color: #fff; /* set selected tab background color as desired */
+color: #000; /* set selected tab link color as desired */
+position: relative;
+top: 1px;
+padding-top: 4px; /* must change with respect to padding (X) above and below */
+}
+
+ul#tabnav li a { /* settings for all tab links */
+padding: 3px 4px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+border: 1px solid #6c6; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+background-color: #cfc; /* set unselected tab background color as desired */
+color: #666; /* set unselected tab link color as desired */
+margin-right: 0px; /* set additional spacing between tabs as desired */
+text-decoration: none;
+border-bottom: none;
+}
+
+ul#tabnav a:hover { /* settings for hover effect */
+background: #fff; /* set desired hover color */
+}
+
+/* end css tabs */
+
+.userProfile .menu
+{
+float:none;
+margin-right:4px;
+margin-left:4px;
+width:auto;
+}
+
+.menuHolder
+{
+float:left;
+border:solid 1px #33cc00;
+border-top:none;
+padding:0;
+width:20%;
+}
+
+.menuHolder h3
+{
+margin:0;
+margin-bottom:8px;
+background:#f4fff4;
+padding:3px;
+text-align:center;
+font-size:115%;
+}
+
+.mediaRow p
+{
+font-size:smaller;
+}
+
+.mediaRow .props li
+{
+display:none;
+}
+
+.mediaRow .props li.published
+{
+display:block;
+border-right:none;
+}
+
+</style>
+
+<script type="text/javascript">
+var FIRST_INCOMING_DELAY = 1000;
+var INCOMING_DELAY = 5000;
+var INCOMING_COUNT = 10;
+
+var firstIncomingCallDone = false;
+var nextIncomingCount = 0;
+var incomingPaused = false;
+var incomingStart = -10;
+
+var incomingArray = new Array();
+
+/*
+window.onblur = function()
+{
+  incomingPaused = true;
+}
+
+window.onfocus = function()
+{
+  incomingPaused = false;
+}
+*/
+
+function getNextIncoming()
+{
+  if(incomingArray.length == 0)
+  {
+    // ajax to get another batch
+    $.ajax
+    ({
+      async: false,
+      type: "GET",
+      url: "/IncomingFeeder.aspx",
+      data:
+      {
+        start: (incomingStart + INCOMING_COUNT),
+        count: INCOMING_COUNT
+      },
+      success:
+      function(batch)
+      {
+        incomingStart += 10;
+        
+       $(".mediaRow", batch).each(function()
+       {
+        incomingArray.push(this);
+       }); 
+      }
+    });
+  }
+  
+  nextIncomingCount++;
+  
+  if(nextIncomingCount % 10 == 0)
+    return $(incomingArray.pop()).css("background", "yellow");
+    
+  else
+    return incomingArray.pop();
+}
+
+function mediaRowClickHandler()
+{
+  $(".props li", this).toggle();
+}
+
+function incomingHandler()
+{
+  if(incomingPaused)
+    return;
+
+  var nextIncoming = getNextIncoming();
+
+  $(nextIncoming).click(mediaRowClickHandler);
+
+  $(nextIncoming).hover
+  (
+    function()
+    {
+      incomingPaused = true;
+    },
+    
+    function()
+    {
+      incomingPaused = false;
+    }
+  );
+
+  if($(".mediaRowList .mediaRow").size() == INCOMING_COUNT)
+    $(".mediaRowList .mediaRow:last").remove();
+  
+  $(nextIncoming).hide().prependTo(".mediaRowList").fadeIn(1500);
+
+  if(!firstIncomingCallDone)
+  {
+    firstIncomingCallDone = true;
+    setInterval(incomingHandler, INCOMING_DELAY);
+  }
+}
+
+$(document).ready(function()
+{
+  setTimeout(incomingHandler, FIRST_INCOMING_DELAY);
+  
+  $(".mediaRow").hover
+  (
+    function()
+    {
+      incomingPaused = true;
+    },
+    
+    function()
+    {
+      incomingPaused = false;
+    }
+  );
+  
+  $(".pause").click(function()
+  {
+    incomingPaused = ($(this).text() == "Pause");
+    $(this).text(incomingPaused ? "Resume" : "Pause");
+    
+    return false;
+  });
+});
+</script>
+
+</head>
+<body>
+<div id="page">
+  <div id="header"><a href="/" class="logo"><img src="/images/exoGet.png" alt="exoGet" /></a>
+    <div class="menus">
+      <ul class="nav">
+        <li><a href="/audio">Audio</a></li>
+        <li class="last"><a href="/video">Video</a></li>
+      </ul>
+      <div class="account">
+        <div class="menu"><a href="/user/Damian/history" class="username"><strong>Damian</strong></a></div>
+        <ul class="actions">
+          <li><a href="/user/Damian/favs">Favorites</a></li>
+          <li><a href="/user/Damian/history">History</a></li>
+          <li><a href="/settings">Settings</a></li>
+          <li class="last"><a href="/signout">Sign Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <form id="searchForm" action="/search" method="get">
+    <fieldset>
+    <label for="s_query" class="queryLabel">Search</label>
+    <input id="s_query" class="query" name="query" type="text" />
+    <input type="submit" value="Search" class="searchButton" />
+    <div id="searchFormScopes">
+      <input id="ss_audio" type="radio" name="scope" value="1"/>
+      <label for="ss_audio">Audio</label>
+      <input id="ss_video" type="radio" name="scope" value="2" checked="checked"/>
+      <label for="ss_video" class="current">Video</label>
+    </div>
+    <a href="#" class="searchFormOptionsOpener" style="display:none">Search Options</a>
+    <div id="searchFormOptionsContainer">
+      <fieldset id="searchFormOptions">
+      <legend class="title">Search Options</legend>
+      <div class="close"></div>
+      <label for="so_duration">Duration</label>
+      <select id="so_duration" name="so_duration">
+        <option value="1024" selected="selected">&lt; 1 min</option>
+        <option value="2048">≥ 1 min</option>
+        <option value="4096">≥ 10 min</option>
+        <option value="8192">≥ 30 min</option>
+      </select>
+      <fieldset>
+      <legend>Quality</legend>
+      <input id="so_qualityPoor" type="checkbox" name="so_1" value="1" checked="checked" />
+      <label for="so_qualityPoor">Poor</label>
+      <input id="so_qualityOk" type="checkbox" name="so_2" value="1" checked="checked" />
+      <label for="so_qualityOk">OK</label>
+      <input id="so_qualityGood" type="checkbox" name="so_4" value="1" checked="checked" />
+      <label for="so_qualityGood">Good</label>
+      <input id="so_qualityExcellent" type="checkbox" name="so_8" value="1" checked="checked" />
+      <label for="so_qualityExcellent">Excellent</label>
+      </fieldset>
+      <fieldset>
+      <legend>Format</legend>
+      <input id="so_formatMp3" type="checkbox" name="so_16" value="1" checked="checked" />
+      <label for="so_formatMp3">MP3</label>
+      <input id="so_formatMsmedia" type="checkbox" name="so_32" value="1" checked="checked" />
+      <label for="so_formatMsmedia">Windows</label>
+      <input id="so_formatRealmedia" type="checkbox" name="so_64" value="1" checked="checked" />
+      <label for="so_formatRealmedia">RealMedia</label>
+      <input id="so_formatQuicktime" type="checkbox" name="so_128" value="1" checked="checked" />
+      <label for="so_formatQuicktime">Quicktime</label>
+      <input id="so_formatMpeg4" type="checkbox" name="so_256" value="1" checked="checked" />
+      <label for="so_formatMpeg4">MP4</label>
+      </fieldset>
+      <button class="saveOptions">Save As Defaults</button>
+      </fieldset>
+    </div>
+    </fieldset>
+  </form>
+  <br class="cb" />
+  
+  <div class="box singleBox userProfile">
+  <div class="top">
+  <strong class="section">Episode</strong>
+    <h1>Arrivals</h1>
+    </div>
+
+<div class="menuHolder">
+<h3>Channels</h3>
+<ul class="menu">
+<li><a href="#">Recent</a></li>
+<li><a href="#">Featured</a></li>
+<li><a href="#">Most Subscribed</a></li>
+<li><a href="#">Categories</a></li>
+<li><a href="#">Tags</a></li>
+</ul>
+
+<h3>Episodes</h3>
+<ul class="menu">
+<li><a href="#">Recent</a></li>
+<li><a href="#">Featured</a></li>
+<li><a href="#">Most Subscribed</a></li>
+<li><a href="#">Categories</a></li>
+<li><a href="#">Tags</a></li>
+</ul>
+
+<!--
+<h3>Categories</h3>
+<ul class="menu">
+<li><a href="#">Business</a></li>
+<li><a href="#">Comedy</a></li>
+<li><a href="#">Education</a></li>
+<li><a href="#">Health</a></li>
+<li><a href="#">Music</a></li>
+<li><a href="#">News</a></li>
+<li><a href="#">Spirituality</a></li>
+<li><a href="#">Science</a></li>
+<li><a href="#">Sports</a></li>
+<li><a href="#">Technology</a></li>
+<li><a href="#">TV</a></li>
+<li><a href="#">Travel</a></li>
+</ul>
+-->
+</div>
+
+<div style="float:right;width:79%">
+  <ul id="tabnav">
+    <li class="tab1"><a href="#">All</a></li>
+    <li class="tab2"><a href="#">Business</a></li>
+    <li class="tab3"><a href="#">Comedy</a></li>
+    <li class="tab4"><a href="#">Technology</a></li>
+  </ul>
+  <div class="mediaRowList">
+  </div>
+</div>
+  
+  <div id="footer"><span>© 2007 exoGet</span>
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li class="last"><a href="/add_content">Add Content</a></li>
+    </ul>
+  </div>
+  <br class="cb" />
+</div>
+<script type="text/javascript" src="http://www.google-analytics.com/urchin.js"></script>
+<script type="text/javascript">_uacct="UA-2640544-1";urchinTracker();</script>
+</body>
+</html>

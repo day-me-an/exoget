@@ -1,0 +1,151 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+public class CommentInfo
+{
+    private uint id;
+    private uint userId;
+    private ushort userAuth;
+    private string userName;
+    private CommentInfo[] childs;
+    private string title;
+    private string message;
+    private ushort approve;
+    private ushort disapprove;
+    private DateTime modified;
+
+	public CommentInfo()
+	{
+	}
+
+    #region Properties
+
+    public uint Id
+    {
+        get
+        {
+            return id;
+        }
+        set
+        {
+            id = value;
+        }
+    }
+
+    public uint UserId
+    {
+        get
+        {
+            return userId;
+        }
+        set
+        {
+            userId = value;
+        }
+    }
+
+    public ushort UserAuth
+    {
+        get
+        {
+            return userAuth;
+        }
+        set
+        {
+            userAuth = value;
+        }
+    }
+
+    public string UserName
+    {
+        get
+        {
+            return userName;
+        }
+        set
+        {
+            userName = value;
+        }
+    }
+
+    public CommentInfo[] Childs
+    {
+        get
+        {
+            return childs;
+        }
+        set
+        {
+            childs = value;
+        }
+    }
+
+    public string Title
+    {
+        get
+        {
+            return title;
+        }
+        set
+        {
+            title = value;
+        }
+    }
+
+    public string Message
+    {
+        get
+        {
+            return message;
+        }
+        set
+        {
+            message = value;
+        }
+    }
+
+    public ushort Approve
+    {
+        get
+        {
+            return approve;
+        }
+        set
+        {
+            approve = value;
+        }
+    }
+
+    public ushort Disapprove
+    {
+        get
+        {
+            return disapprove;
+        }
+        set
+        {
+            disapprove = value;
+        }
+    }
+
+    public DateTime Modified
+    {
+        get
+        {
+            return modified;
+        }
+        set
+        {
+            modified = value;
+        }
+    }
+
+    #endregion
+}

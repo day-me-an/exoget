@@ -1,0 +1,49 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Collections.Generic;
+using Exo.Exoget.Search;
+
+public class ResultInfo
+{
+    private MediaInfo[] medias;
+    private uint resultsFoundCount;
+    private KeyValuePair<IndexPropertyType, int>[] properties;
+
+	public ResultInfo()
+	{
+	}
+
+    public MediaPropertyInfo[] GetPropertiesByType(IndexPropertyType type)
+    {
+        List<MediaPropertyInfo> mediaPropertiesList = new List<MediaPropertyInfo>();
+
+        foreach (MediaInfo media in medias)
+            mediaPropertiesList.AddRange(media.GetPropertiesByType(type));
+
+            return mediaPropertiesList.ToArray();
+    }
+
+    public MediaInfo[] Medias
+    {
+        get { return medias; }
+        set { medias = value; }
+    }
+
+    public int ResultsCount
+    {
+        get { return Medias.Length; }
+    }
+
+    public uint ResultsFoundCount
+    {
+        get { return resultsFoundCount; }
+        set { resultsFoundCount = value; }
+    }
+}

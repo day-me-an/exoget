@@ -1,0 +1,80 @@
+body
+{
+    word-wrap:break-word;
+}
+
+#searchFormOptions
+{
+	position:relative;
+	padding-top:1em;
+}
+
+#searchFormOptions > legend
+{
+	position:absolute;
+	top:-.5em;
+	left:.2em;
+}
+
+#header .menus
+{
+    margin-top:6px;
+}
+
+#header .menus .account .username span
+{
+    cursor:pointer;
+}
+
+#header .menus .account .menu
+{
+	margin-top:5px;
+}
+
+#header .menus .account .anonymousMessage
+{
+	margin-top:5px;
+}
+
+#searchForm .searchButton
+{
+    padding:0;
+	width:4em;
+}
+
+#searchFormScopes
+{
+	margin-left:241px;
+}
+
+#searchForm .searchFormOptionsOpener
+{
+	margin-left:43px;
+}
+
+#searchFormOptionsContainer
+{
+	left:0;
+	padding-top:2em;
+}
+
+.box .top
+{
+    display:block;
+}
+
+.filloutForm ul li .error
+{
+    padding-bottom:2px;
+}
+
+.mediaRow .star-rating span
+{
+    display:block;
+    margin-top:4px;
+}
+
+.staff li div
+{
+	margin-top:-2.5em;
+}

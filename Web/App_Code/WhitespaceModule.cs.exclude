@@ -1,0 +1,34 @@
+using System;
+using System.IO;
+using System.Web;
+using System.IO.Compression;
+using System.Text.RegularExpressions;
+using System.Text;
+using Exo.Web;
+
+/// <summary>
+/// Removes whitespace from the webpage.
+/// </summary>
+public class WhitespaceModule : IHttpModule
+{
+    #region IHttpModule Members
+
+    void IHttpModule.Dispose()
+    {
+    }
+
+    void IHttpModule.Init(HttpApplication context)
+    {
+        context.BeginRequest += new EventHandler(AddHtmlCompressStreamFilter);
+    }
+
+    #endregion
+
+    private void AddHtmlCompressStreamFilter(object sender, EventArgs e)
+    {
+        HttpApplication app = HttpContext.Current.ApplicationInstance;
+
+        if (app.Request.RawUrl.LastIndexOf(".aspx") != -1 || app.Request.RawUrl.LastIndexOf(".html") != -1)
+            app.Response.Filter = new HtmlCompressStream(app.Response.Filter);
+    }
+}

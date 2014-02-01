@@ -1,0 +1,108 @@
+        #region Descriptive Text Sampler
+
+        public Line[] GetDescriptiveTextSample(Line[] lines,
+            int startPos,
+            int downwards,
+            int upwards,
+            Line[] relativeDesciptivenessSortedLines,
+            double minDescriptivenessPosition,
+            double maxDescriptivenessPosition)
+        {
+            List<Line> sample = new List<Line>(downwards + upwards);
+
+            int
+                from = startPos - downwards,
+                to = startPos + upwards;
+
+            if (from < 0)
+                from = 0;
+
+            if (to > lines.Length - 1)
+                to = lines.Length - 1;
+
+            for (int i = startPos; i > from; i--)
+            {
+                if (lines[i].Type == LineType.Text)
+                {
+                    int desciptivenessPosition = Array.IndexOf(relativeDesciptivenessSortedLines, lines[i]);
+                    bool descriptiveEnough = desciptivenessPosition >= (lines.Length - (lines.Length * maxDescriptivenessPosition)) &&
+                        (minDescriptivenessPosition != 0 ? (desciptivenessPosition <= (lines.Length * minDescriptivenessPosition)) : true);
+
+                    if (descriptiveEnough)
+                        sample.Add(lines[i]);
+
+                    else if (from > 0)
+                        from--;
+
+                }
+                else if (from > 0)
+                    from--;
+            }
+
+            for (int i = startPos; i < to; i++)
+            {
+                if (lines[i].Type == LineType.Text)
+                {
+                    int desciptivenessPosition = Array.IndexOf(relativeDesciptivenessSortedLines, lines[i]);
+                    bool descriptiveEnough = desciptivenessPosition >= (lines.Length - (lines.Length * maxDescriptivenessPosition)) &&
+                        (minDescriptivenessPosition != 0 ? (desciptivenessPosition <= (lines.Length * minDescriptivenessPosition)) : true);
+
+                    if (descriptiveEnough)
+                        sample.Add(lines[i]);
+
+                    else if (to < lines.Length)
+                        to++;
+
+                }
+                else if (to < lines.Length)
+                    to++;
+            }
+
+            return sample.ToArray();
+        }
+
+        public Line[] GetDescriptiveTextSample(Line[] lines,
+                int startPos,
+                int downwards,
+                int upwards,
+                double minDescriptivenessPosition)
+        {
+            return GetDescriptiveTextSample(lines,
+                    startPos,
+                    downwards,
+                    upwards,
+                    descriptivenessSortedLines,
+                    minDescriptivenessPosition,
+                    1);
+        }
+
+        public Line[] GetDescriptiveTextSample(Line[] lines,
+            int startPos,
+            int downwards,
+            int upwards,
+            double minDescriptivenessPosition,
+            double maxDescriptivenessPosition)
+        {
+            return GetDescriptiveTextSample(lines,
+                    startPos,
+                    downwards,
+                    upwards,
+                    descriptivenessSortedLines,
+                    minDescriptivenessPosition, maxDescriptivenessPosition);
+        }
+
+        public Line[] GetDescriptiveTextSample(Line[] lines,
+                int startPos,
+                int downwards,
+                int upwards)
+        {
+            return GetDescriptiveTextSample(lines,
+                    startPos,
+                    downwards,
+                    upwards,
+                    descriptivenessSortedLines,
+                    0,
+                    1);
+        }
+
+        #endregion

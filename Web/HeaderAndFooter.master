@@ -1,0 +1,89 @@
+﻿<%@ Master Language="C#" AutoEventWireup="false" CodeFile="HeaderAndFooter.master.cs" Inherits="HeaderAndFooter" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <meta name="robots" content="noarchive" />
+    <link rel="stylesheet" type="text/css" href="http://static.exoget.com/css/main.css" />
+    <link rel="search" title="exoGet" type="application/opensearchdescription+xml" href="http://static.exoget.com/opensearch.xml" />
+    <script type="text/javascript" src="http://static.exoget.com/js/merge.js"></script>
+    <!--[if IE]>
+        <link rel="stylesheet" type="text/css" href="http://static.exoget.com/css/mainIe7.css" />
+    <![endif]-->
+    
+    <!--[if lt IE 7]>
+        <link rel="stylesheet" type="text/css" href="http://static.exoget.com/css/mainIe6.css" />
+        <script type="text/javascript">fixIE6();</script>
+    <![endif]-->
+</head>
+
+<body>
+<div id="page">
+
+    <div id="header">
+        <a href="/" class="logo">
+            <img src="http://static.exoget.com/images/exoGet.png" alt="exoGet" />
+        </a>
+        
+        <div class="menus">
+            <ul class="nav">
+                <li><a href="/audio">Audio</a></li>
+                <li class="last"><a href="/video">Video</a></li>
+            </ul>
+            
+            <div class="account">
+                <asp:LoginView ID="LoginView1" runat="server">
+                    <AnonymousTemplate>
+                        <span class="anonymousMessage">Welcome</span>
+                                
+                        <div class="actions">
+                            <a href="/signin">Sign In</a>#s#<span>or</span>#s#<a href="/register">Register</a>
+                        </div>
+                    </AnonymousTemplate>
+
+                    <LoggedInTemplate>
+                        <div class="menu">
+                            <a href="/user/<%=Context.User.Identity.Name%>/history" class="username">
+                                <strong><%=Context.User.Identity.Name%></strong>
+                            </a>
+                        </div>
+
+                        <ul class="actions">
+                            <li><a href="/user/<%=Context.User.Identity.Name%>/favs">Favorites</a></li>
+                            <li><a href="/user/<%=Context.User.Identity.Name%>/history">History</a></li>
+                            <li><a href="/settings">Settings</a></li>
+                            <li class="last"><a href="/signout">Sign Out</a></li>
+                        </ul>
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </div>
+        </div>
+    </div>
+
+    <exo:SearchForm ID="searchForm" runat="server" />
+
+    <br class="cb" />
+
+    <asp:ContentPlaceHolder ID="content" runat="server"></asp:ContentPlaceHolder>
+
+    <div id="footer">
+        <span>© <%=DateTime.Now.Year%> exoGet</span>
+        <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li class="last"><a href="/add_content">Add Content</a></li>
+            <%--
+            <li><a href="/privacy"><asp:localize runat="server" Text="<%$ Resources:Resource,PrivacyPolicy %>" /></a></li>
+            <li><a href="/terms"><asp:localize runat="server" Text="<%$ Resources:Resource,TermsOfService %>" /></a></li>
+            <li><a href="/Advertise.aspx"><asp:localize runat="server" Text="<%$ Resources:Resource,Advertise %>" /></a></li>
+            <li><a href="/Jobs.aspx" class="last"><asp:localize runat="server" Text="<%$ Resources:Resource,Jobs %>" /></a></li>
+            --%>
+        </ul>	
+    </div>
+    <br class="cb" />
+</div>
+
+<script type="text/javascript" src="http://www.google-analytics.com/urchin.js"></script>
+<script type="text/javascript">_uacct="UA-2640544-1";urchinTracker();</script>
+
+</body>
+</html>
